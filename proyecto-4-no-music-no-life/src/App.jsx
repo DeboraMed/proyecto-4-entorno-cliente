@@ -8,6 +8,7 @@ const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
 function App() {
   const [inputBusqueda, setInputBusqueda] = useState("")
   const [tokenAcceso, setTokenAcceso] = useState("") // token de acceso
+  const [ albums, setAlbums] = useState([])
 
   // se ejecuta al comienzo 
   useEffect(() => {
@@ -22,29 +23,37 @@ function App() {
     fetch('https://accounts.spotify.com/api/token',parametrosAutor)
       //promesa
       .then(result => result.json())
-      .then(data => setTokenAcceso(data.token_acceso)) 
-      .then(data => console.log(data)) 
-      // TODO: voy por aqui
+      .then(data => setTokenAcceso(data.access_token)) 
   }, [])
 
   // busqueda
   async function busqueda() {
     console.log("Busqueda de " + inputBusqueda)
 
-    //request por Id de artista
-    let parametrosArtista = {
+    let parametrosBusqueda = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + tokenAcceso
       }
     }
-    let IdArtista = await fetch('https://api.spotify.com/v1/search?q='+ inputBusqueda + '&type=artist', parametrosArtista)
+
+     //request por Id de artista: 
+    let idArtista = await fetch('https://api.spotify.com/v1/search?q='+ inputBusqueda + '&type=artist', parametrosBusqueda)
       .then( response => response.json())
-      .then( data => console.log(data))
+      .then( data => { return data.artists.items[0].id})
 
+      console.log("el artista es " + idArtista)
+      // obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
+      let obtenerAlbums = await fetch('https://api.spotify.com/v1/artists/'+ idArtista + '/albums'+ '?include_groups=album&market=ES&limit=50',parametrosBusqueda)
+        .then(response => response.json())
+        .then(data => { 
+          console.log(data);
+          setAlbums(data.items); 
+        })
+      // mostrar los albunes
   }
-
+  console.log(albums)
   return (
     <>
       <div className='App'>
@@ -65,23 +74,18 @@ function App() {
         </InputGroup>
        </Container>
        <Container>
-          <Row className='mx-2 row row-cols-4'>
+          <Row className="mx-2 row row-cols-4">
+          {albums.map( (album, i) =>{
+            console.log(album)
+            return(
+              <Card>
             <Card.Img src="#"/>
               <Card.Body>
-                <Card.Title>Nombre del disco</Card.Title>
-              </Card.Body>        
-            <Card.Img src="#"/>
-              <Card.Body>
-                <Card.Title>Nombre del disco</Card.Title>
-              </Card.Body>        
-            <Card.Img src="#"/>
-              <Card.Body>
-                <Card.Title>Nombre del disco</Card.Title>
-              </Card.Body>      
-            <Card.Img src="#"/>
-              <Card.Body>
-                <Card.Title>Nombre del disco</Card.Title>
-              </Card.Body>         
+                <Card.Title>{album.name}</Card.Title>
+              </Card.Body>   
+            </Card> 
+            )
+          })}             
           </Row>
        </Container>
       </div> 
