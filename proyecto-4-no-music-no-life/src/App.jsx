@@ -6,9 +6,10 @@ const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
 
 function App() {
-  const [inputBusqueda, setInputBusqueda] = useState("")
-  const [tokenAcceso, setTokenAcceso] = useState("") // token de acceso
+  const [ inputBusqueda, setInputBusqueda] = useState("")
+  const [ tokenAcceso, setTokenAcceso] = useState("")
   const [ albums, setAlbums] = useState([])
+  const [albumActual, setAlbumActual] = useState("")
 
   // se ejecuta al comienzo 
   useEffect(() => {
@@ -28,7 +29,7 @@ function App() {
 
   // busqueda
   async function busqueda() {
-    console.log("Busqueda de " + inputBusqueda)
+    //console.log("Busqueda de " + inputBusqueda)
 
     let parametrosBusqueda = {
       method: 'GET',
@@ -43,7 +44,8 @@ function App() {
       .then( response => response.json())
       .then( data => { return data.artists.items[0].id})
 
-      console.log("el artista es " + idArtista)
+      //console.log("el artista es " + idArtista)
+
       // obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
       let obtenerAlbums = await fetch('https://api.spotify.com/v1/artists/'+ idArtista + '/albums'+ '?include_groups=album&market=ES&limit=50',parametrosBusqueda)
         .then(response => response.json())
@@ -51,9 +53,11 @@ function App() {
           console.log(data);
           setAlbums(data.items); 
         })
-      // mostrar los albunes
+      
+      // TODO: mostrar la infomación del album en otra pagina
   }
-  console.log(albums)
+  //console.log(albums)
+  
   return (
     <>
       <div className='App'>
@@ -76,15 +80,17 @@ function App() {
        <Container>
           <Row className="mx-2 row row-cols-4">
           {albums.map( (album, i) =>{
-            console.log(album)
+            console.log(albumActual)
+            // mostrar los albunes
             return(
               <Card>
-            <Card.Img src="#"/>
+            <Card.Img src={album.images[0].url} onClick={() => setAlbumActual(album.id)}/>
               <Card.Body>
                 <Card.Title>{album.name}</Card.Title>
               </Card.Body>   
             </Card> 
             )
+
           })}             
           </Row>
        </Container>
