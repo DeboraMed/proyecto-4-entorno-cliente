@@ -61,7 +61,7 @@ function Home() {
   
   return (
     <>
-      <div className='App'>
+      <div className='Home mx-3 mt-5'>
       {/* elementos de Bootstrap */}
        <Container>
         <InputGroup className='mb-3' size='lg'>

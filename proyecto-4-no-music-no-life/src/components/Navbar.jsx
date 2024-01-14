@@ -17,7 +17,8 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+            <a class="navbar-brand" href="#">No Music No Life</a>
             <NavLink to="/" className="btn btn-outline-primary">Home</NavLink>
 
             {/* condicional si hay usuario */}
@@ -31,7 +32,8 @@ const Navbar = () => {
                     <button onClick={() => setUser(true)}>Login</button>)
             };
 
-            <NavLink to="/contacto" className="btn btn-outline-primary">Contacto</NavLink>  
+            <NavLink to="/contacto" className="btn btn-outline-primary">Contacto</NavLink> 
+          
             </nav>
         </div>
     )
