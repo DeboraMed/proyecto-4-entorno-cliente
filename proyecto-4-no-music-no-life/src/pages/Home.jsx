@@ -6,7 +6,7 @@ const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
 
 
-function App() {
+function Home() {
   const [ inputBusqueda, setInputBusqueda] = useState("")
   const [ tokenAcceso, setTokenAcceso] = useState("")
   const [ albums, setAlbums] = useState([])
@@ -100,4 +100,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
