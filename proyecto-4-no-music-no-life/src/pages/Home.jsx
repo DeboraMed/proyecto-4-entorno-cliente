@@ -9,6 +9,7 @@ const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
 function Home() {
   const [ inputBusqueda, setInputBusqueda] = useState("")
   const [ tokenAcceso, setTokenAcceso] = useState("")
+  const [ artist, setArtist] = useState([])
   const [ albums, setAlbums] = useState([])
   const [ albumActual, setAlbumActual] = useState("")
 
@@ -43,21 +44,22 @@ function Home() {
      //request por Id de artista: 
     let idArtista = await fetch('https://api.spotify.com/v1/search?q='+ inputBusqueda + '&type=artist', parametrosBusqueda)
       .then( response => response.json())
-      .then( data => { return data.artists.items[0].id})
-
-      //console.log("el artista es " + idArtista)
+      .then( data => { 
+        console.log(data)
+        setArtist(data.artists.items[0])
+        return data.artists.items[0].id})
 
       // obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
     let obtenerAlbums = await fetch('https://api.spotify.com/v1/artists/'+ idArtista + '/albums'+ '?include_groups=album&market=ES&limit=50',parametrosBusqueda)
       .then(response => response.json())
       .then(data => { 
-        console.log(data);
+        //console.log(data);
         setAlbums(data.items); 
       })
       
       // TODO: mostrar la infomación del album en otra pagina
   }
-  console.log(albums)
+  //console.log(albums)
   
   return (
     <>
@@ -66,6 +68,7 @@ function Home() {
        <Container>
         <InputGroup className='mb-3' size='lg'>
         <FormControl
+          name = 'busqueda'
           placeholder='Busqueda de Artista'
           type='input'
           onKeyDown={e => {
@@ -79,6 +82,8 @@ function Home() {
         </InputGroup>
        </Container>
        <Container>
+       <h1>{artist.name}</h1>
+       {/* <h3>{artist.genres}</h3> */}
           <Row className="mx-2 mt-2 row row-cols-4">
           {albums.map( (album, i) =>{
             console.log(albumActual)

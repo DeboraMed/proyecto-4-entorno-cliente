@@ -8,6 +8,7 @@ const Login = () => {
 
     const mensajeError= validar(email,password);
     console.log(email,password)
+    //TODO: Hacer pagina de registro de usuario y guardarlo en IndexedDB, cargar los datos en login del IndexedDB
 
     return (
         <div className='Home mx-3 mt-5'>
