@@ -57,7 +57,7 @@ function Home() {
       
       // TODO: mostrar la infomación del album en otra pagina
   }
-  //console.log(albums)
+  console.log(albums)
   
   return (
     <>
@@ -79,15 +79,18 @@ function Home() {
         </InputGroup>
        </Container>
        <Container>
-          <Row className="mx-2 row row-cols-4">
+          <Row className="mx-2 mt-2 row row-cols-4">
           {albums.map( (album, i) =>{
             console.log(albumActual)
             // mostrar los albunes
             return(
-              <Card>
-            <Card.Img src={album.images[0].url} onClick={() => setAlbumActual(album.id)}/>
+              <Card className='mt-2 cursor-pointer'>
+            <Card.Img className='mt-3' src={album.images[0].url} onClick={() => setAlbumActual(album.id)}/>
               <Card.Body>
-                <Card.Title>{album.name}</Card.Title>
+                <Card.Title>
+                <h5>{album.name}</h5>
+                <h6>{album.release_date}</h6>
+                </Card.Title>
               </Card.Body>   
             </Card> 
             )

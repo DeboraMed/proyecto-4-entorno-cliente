@@ -1,15 +1,13 @@
 import Form from 'react-bootstrap/Form';
-import { Container } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import { useState } from 'react';
 
+const Login = () => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-const Contacto = () => {
-    const [nombre, setNombre] = useState("");
-    const [email, setEmail] = useState("");
-    
-
-    const mensajeError= validar(email,nombre);
-    console.log(email,nombre)
+    const mensajeError= validar(email,password);
+    console.log(email,password)
 
     return (
         <div className='Home mx-3 mt-5'>
@@ -19,16 +17,6 @@ const Contacto = () => {
                     e.preventDefault();
                     login(email,password);
                 }}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Nombre</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        name='nombre'
-                        placeholder='Nombre'
-                        value = {nombre}
-                        onChange = {e => setNombre(e.target.value)}
-                         />
-                </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control 
@@ -41,8 +29,14 @@ const Contacto = () => {
                          />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Mensaje</Form.Label>
-                    <Form.Control as="textarea" rows={4} />
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control 
+                        type="password"
+                        name='password'
+                        placeholder='Contraseña'
+                        value = {password}
+                        onChange = {e => setPassword(e.target.value)}
+                         />
                 </Form.Group>
                 <button type='submit' className='btn btn-outline-primary active' disabled={mensajeError}>Iniciar sesión</button>
                 <p>{mensajeError}</p>
@@ -64,4 +58,4 @@ const validar = (email, password) => {
     else if (password.length <4) return 'Contraseña de mínimo 4 caracteres.';
 }
 
-export default Contacto
+export default Login
