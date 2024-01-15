@@ -24,7 +24,7 @@ const Navbar = () => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-                <a className="navbar-brand" href="#">No Music No Life</a>
+                <a className="navbar-brand" href="/">No Music No Life</a>
                 <NavLink to="/" className="btn btn-link text-light text-decoration-none">Home</NavLink>
 
                 {/* condicional si hay usuario */}
