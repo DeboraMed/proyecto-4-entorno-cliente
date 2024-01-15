@@ -53,7 +53,7 @@ const Contacto = () => {
 
                         />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active' disabled={mensajeError}>Iniciar sesión</button>
+                <button type='submit' className='btn btn-outline-primary active' disabled={mensajeError}>Enviar</button>
                 <p>{mensajeError}</p>
             </Form>
        </Container>
