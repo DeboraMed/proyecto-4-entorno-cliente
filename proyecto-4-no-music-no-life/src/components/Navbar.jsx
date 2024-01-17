@@ -4,13 +4,10 @@ import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
 
-    console.log(useContext(UserContext))
     const {user,setUser} = useContext(UserContext)   
-
     const navigate = useNavigate()
 
     const loginUsuario = () => {
-        setUser(true)
         navigate("/login")
     }
 
@@ -24,7 +21,6 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
                 <NavLink to="/" className="navbar-brand">No Music No Life</NavLink>
                 <NavLink to="/" className="btn btn-link text-light text-decoration-none">Home</NavLink>
-
                 {/* condicional si hay usuario */}
                 {
                     user?(

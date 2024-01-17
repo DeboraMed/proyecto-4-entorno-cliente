@@ -3,15 +3,27 @@ import { Container} from 'react-bootstrap';
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { validaUsuario } from '../database/DBusuarios';
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const {user,setUser} = useContext(UserContext)
 
     const mensajeError= validar(email,password);
     console.log(email,password)
-    //TODO:cargar los datos del login del IndexedDB
+
+    const login = async (email, password) => {
+        let credencialesvalidas = await validaUsuario(email, password)
+        if (credencialesvalidas) {
+            alert('Login correcto')
+            setUser(credencialesvalidas)
+        }
+        else
+            alert('Login incorrecto')
+    }
 
     return (
         <div className='Home mx-3 mt-5'>
@@ -52,22 +64,10 @@ const Login = () => {
     )
 }
 
-const login = async (email, password) => {
-    let credencialesvalidas = await validaUsuario(email, password)
-    if (credencialesvalidas)
-        alert('Login correcto')
-    else
-        alert('Login incorrecto')
-    /*
-    if (email === 'prueba@prueba.com' && password === 'test')
-        alert('Login correcto')
-    else alert('Login incorrecto')*/
-}
-
 const validar = (email, password) => {
     if(!email.includes('@')) return 'Email incorrecto.';
     if(password.length === 0) return 'Introduce la contraseña.';
-    //else if (password.length <4) return 'Contraseña de mínimo 4 caracteres.';
+    else if (password.length <4) return 'Contraseña de mínimo 4 caracteres.';
 }
 
 export default Login

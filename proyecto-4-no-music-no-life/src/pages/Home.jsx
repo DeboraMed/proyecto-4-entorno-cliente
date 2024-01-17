@@ -1,6 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
 
 const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"

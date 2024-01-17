@@ -47,7 +47,9 @@ export const validaUsuario = (email, password) => {
             const user = store.get(email)
             user.onsuccess = function (event) {
                 try {
-                    result(password === event.target.result.password)
+                    if(password === event.target.result.password)
+                        result({nombre: event.target.result.nombre,
+                                email: event.target.result.email})
                 } catch {
                     result(false)
                 }
