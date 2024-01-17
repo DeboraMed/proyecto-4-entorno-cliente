@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form';
 import { Container} from 'react-bootstrap';
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { validaUsuario } from '../database/DBusuarios';
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -51,10 +52,16 @@ const Login = () => {
     )
 }
 
-const login = (email, password) => {
+const login = async (email, password) => {
+    let credencialesvalidas = await validaUsuario(email, password)
+    if (credencialesvalidas)
+        alert('Login correcto')
+    else
+        alert('Login incorrecto')
+    /*
     if (email === 'prueba@prueba.com' && password === 'test')
         alert('Login correcto')
-    else alert('Login incorrecto')
+    else alert('Login incorrecto')*/
 }
 
 const validar = (email, password) => {

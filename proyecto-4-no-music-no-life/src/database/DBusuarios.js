@@ -30,3 +30,36 @@ function insertarUsuario(usuario, db) {
         db.close()
     }
 }
+
+export const validaUsuario = (email, password) => {
+    return new Promise((result) => {
+        let request = indexedDB.open("Users", 1)
+
+        request.onerror = function () {
+            console.error("Error", openRequest.error)
+        }
+        request.onsuccess = function (event) {
+
+            const db = event.target.result
+            const txn = db.transaction('User', 'readonly')
+            const store = txn.objectStore('User')
+
+            const user = store.get(email)
+            user.onsuccess = function (event) {
+                try {
+                    result(password === event.target.result.password)
+                } catch {
+                    result(false)
+                }
+            }
+            user.onerror = function () {
+                result(false)
+            }
+            txn.oncomplete = () => {
+                db.close()
+            }
+        }
+    })
+}
+
+
