@@ -1,7 +1,8 @@
 import Form from 'react-bootstrap/Form';
 import { Container} from 'react-bootstrap';
 import { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { DBusuarios } from '../database/DBusuarios';
 
 const Registro = () => {
     // TODO: Hacer pagina de registro de usuario y guardarlo en IndexedDB 
@@ -9,18 +10,30 @@ const Registro = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const usuario = { nombre, email, password }
 
     const mensajeError= validar(nombre,email,password);
     console.log(nombre,email,password)
+    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!mensajeError) {
+            try {
+                await DBusuarios.add(usuario);
+                alert('Usuario registrado correctamente');
+            } catch (error) {
+                console.error('Error al guardar el usuario en la base de datos:', error);
+                alert('Error al registrar el usuario');
+            }
+        }
+    };
 
     return (
         <div className='Home mx-3 mt-5'>
         <Container>
             <Form
-                onSubmit={e=> {
-                    e.preventDefault();
-                    login(nombre,email,password);
-                }}>
+                onSubmit={handleSubmit}>
                 <Form.Group className="mb-3 w-50">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control 
