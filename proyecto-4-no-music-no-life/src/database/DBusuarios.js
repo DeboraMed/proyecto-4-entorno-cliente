@@ -1,4 +1,3 @@
-// TODO: revisar que el usuario llegue
 export function DBusuarios(usuario) {
     let request = indexedDB.open("Users", 1)
 
@@ -11,7 +10,7 @@ export function DBusuarios(usuario) {
     }
     request.onupgradeneeded = (event) => {
         let db = event.target.result
-        const store = db.createObjectStore('User', { autoIncrement: true })
+        const store = db.createObjectStore('User', { keyPath: 'email' })
         store.createIndex('email', 'email', { unique: true })
     }
 }
@@ -19,7 +18,7 @@ export function DBusuarios(usuario) {
 function insertarUsuario(usuario, db) {
     const txn = db.transaction('User', 'readwrite')
     const store = txn.objectStore('User')
-    let query = store.put(userOBJ)
+    let query = store.put(usuario)
 
     query.onsuccess = function (event) {
         console.log(event)

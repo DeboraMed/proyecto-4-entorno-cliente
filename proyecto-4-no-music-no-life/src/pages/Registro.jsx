@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { DBusuarios } from '../database/DBusuarios';
 
 const Registro = () => {
-    // TODO: Hacer pagina de registro de usuario y guardarlo en IndexedDB 
     const [nombre, setNombre] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -20,7 +19,7 @@ const Registro = () => {
         e.preventDefault();
         if (!mensajeError) {
             try {
-                await DBusuarios.add(usuario);
+                DBusuarios(usuario);
                 alert('Usuario registrado correctamente');
             } catch (error) {
                 console.error('Error al guardar el usuario en la base de datos:', error);
