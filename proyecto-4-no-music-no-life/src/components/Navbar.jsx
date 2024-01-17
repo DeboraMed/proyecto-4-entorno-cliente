@@ -9,13 +9,11 @@ const Navbar = () => {
 
     const navigate = useNavigate()
 
-    //funcion login
     const loginUsuario = () => {
         setUser(true)
         navigate("/login")
     }
 
-    // funcion cerrar sesion
     const cerrarSesion = () => {
         setUser(false)
         navigate("/")
@@ -24,7 +22,7 @@ const Navbar = () => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-                <a className="navbar-brand" href="/">No Music No Life</a>
+                <NavLink to="/" className="navbar-brand">No Music No Life</NavLink>
                 <NavLink to="/" className="btn btn-link text-light text-decoration-none">Home</NavLink>
 
                 {/* condicional si hay usuario */}
@@ -32,12 +30,12 @@ const Navbar = () => {
                     user?(
                     <>
                         <NavLink to ="/perfil" className="btn btn-link text-light text-decoration-none"> Perfil </NavLink>
-                        <button className="btn btn-link text-light text-decoration-none" onClick={() => cerrarSesion()}>Log Out</button>
+                        <button onClick={() => cerrarSesion()} className="btn btn-link text-light text-decoration-none" >Log Out</button>
                     </>
                     ):(
-                        <button className="btn btn-link text-light text-decoration-none" onClick={() => loginUsuario()}>Login</button>)
+                        <button  onClick={() => loginUsuario()} className="btn btn-link text-light text-decoration-none">Login</button>)
                 };
-
+                <NavLink to="/registro" className="btn btn-link text-light text-decoration-none">Registrate</NavLink> 
                 <NavLink to="/contacto" className="btn btn-link text-light text-decoration-none">Contacto</NavLink> 
             </nav>
         </div>

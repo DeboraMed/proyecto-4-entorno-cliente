@@ -1,8 +1,11 @@
 html {
     min-height: 100%;
     position: relative;
+    
   }
   body {
+    background-image: url(../assets/nino.jpg);
+    background-size: cover;
     margin: 0;
     margin-bottom: 100px;
   }
