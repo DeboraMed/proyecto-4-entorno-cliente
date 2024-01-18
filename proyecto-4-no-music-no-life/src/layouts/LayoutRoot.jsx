@@ -9,18 +9,18 @@ const LayoutRoot = () => {
 
     // estructura de la página
     return ( 
-        <div>
+        <>
             <Navbar />
-            <div>
+            
                 {
                     navigation.state === "loading" && (
                         <div>Loading</div>
                     )
                 }
-            </div>
+            
             <Outlet />
             <Footer/>
-        </div>
+        </>
     )
 }
 

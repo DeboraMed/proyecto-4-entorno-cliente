@@ -56,15 +56,12 @@ function Home() {
         //console.log(data);
         setAlbums(data.items); 
       })
-      
-      // TODO: mostrar la infomación del album en otra pagina
   }
   //console.log(albums)
   
   return (
     <>
       <div className='Home mx-3 mt-5'>
-      {/* elementos de Bootstrap */}
        <Container>
         <InputGroup className='mb-3' size='lg'>
         <FormControl
@@ -83,9 +80,10 @@ function Home() {
        </Container>
        <Container>
        <h1>{artist.name}</h1>
-       {/* <h3>{artist.genres}</h3> */}
+       //TODO: comprobar la persistencia de los datos para que no pete
+       {/* <h4>{artist.genres.map((genre) => genre).join(', ')}</h4> */}
           <Row className="mx-2 mt-2 row row-cols-4">
-          {albums.map( (album, i) =>{
+          {albums.map((album, i) =>{
             console.log(albumActual)
             // mostrar los albunes
             return(
@@ -99,7 +97,6 @@ function Home() {
               </Card.Body>   
             </Card> 
             )
-
           })}             
           </Row>
        </Container>

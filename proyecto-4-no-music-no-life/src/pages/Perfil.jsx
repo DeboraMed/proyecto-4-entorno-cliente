@@ -5,13 +5,16 @@ import { Container,Card } from 'react-bootstrap'
 const Perfil = () => {
 
     const {user,setUser} = useContext(UserContext)
+    let nombre = user.nombre
+    let email = user.email
     console.log(user)
 
     return (
         <Container>
-        <Card className='mx-3'>
+        <Card className="bg-dark text-white pt-4 pb-4 px-3 mt-4 mb-4 w-50">
             <Card.Title>Bienvenido {user.nombre}</Card.Title>
-            <Card.Subtitle>Email: {user.email}</Card.Subtitle>
+            <Card.Subtitle className='pt-1'>Nombre: {nombre}</Card.Subtitle>
+            <Card.Subtitle className='pt-1'>Email: {email}</Card.Subtitle>
         </Card>
         </Container>
     )

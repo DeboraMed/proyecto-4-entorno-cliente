@@ -3,11 +3,11 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
-
     const {user,setUser} = useContext(UserContext)   
     const navigate = useNavigate()
 
     const loginUsuario = () => {
+        setUser(true)
         navigate("/login")
     }
 

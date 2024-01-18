@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 const Footer = () => {
     return (
         <>
-        <footer className='footer fixed-bottom mt-auto py-3 bg-dark'>
+        <footer className='footer fixed-bottom mb-0 mt-auto py-1 bg-dark'>
         <div className="container">
         <Nav className="justify-content-center border-bottom pb-3 mb-3" activeKey="/">
             <Nav.Item>
