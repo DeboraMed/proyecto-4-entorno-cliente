@@ -26,7 +26,7 @@ const Login = () => {
     }
 
     return (
-        <div className='Home mx-3 mt-5'>
+        <div className='Home mx-3 mt-5 mb-5'>
         <Container>
             <Form
                 onSubmit={e=> {

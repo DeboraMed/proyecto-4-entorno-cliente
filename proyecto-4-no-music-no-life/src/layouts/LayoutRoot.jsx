@@ -7,7 +7,6 @@ const LayoutRoot = () => {
     const navigation = useNavigation()
     console.log(navigation)
 
-    // estructura de la página
     return ( 
         <>
             <Navbar />
@@ -17,9 +16,8 @@ const LayoutRoot = () => {
                         <div>Loading</div>
                     )
                 }
-            
-            <Outlet />
             <Footer/>
+            <Outlet />
         </>
     )
 }

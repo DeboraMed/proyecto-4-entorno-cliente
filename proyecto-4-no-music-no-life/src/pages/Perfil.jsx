@@ -12,7 +12,7 @@ const Perfil = () => {
     return (
         <Container>
         <Card className="bg-dark text-white pt-4 pb-4 px-3 mt-4 mb-4 w-50">
-            <Card.Title>Bienvenido {user.nombre}</Card.Title>
+            <Card.Title>Bienvenido/a {user.nombre}</Card.Title>
             <Card.Subtitle className='pt-1'>Nombre: {nombre}</Card.Subtitle>
             <Card.Subtitle className='pt-1'>Email: {email}</Card.Subtitle>
         </Card>

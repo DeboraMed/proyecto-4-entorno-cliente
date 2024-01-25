@@ -75,11 +75,6 @@ const Registro = () => {
     )
 }
 
-const login = (nombre,email, password) => {
-    if (email === 'prueba@prueba.com' && password === 'test')
-        alert('Login correcto')
-    else alert('Login incorrecto')
-}
 
 const validar = (nombre,email, password) => {
     if(nombre.length <3) return 'Nombre de mínimo 3 caracteres.';

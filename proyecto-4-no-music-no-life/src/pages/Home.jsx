@@ -49,7 +49,7 @@ function Home() {
         setArtist(data.artists.items[0])
         return data.artists.items[0].id})
 
-      // obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
+      // LLAMADA ANIDADA obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
     let obtenerAlbums = await fetch('https://api.spotify.com/v1/artists/'+ idArtista + '/albums'+ '?include_groups=album&market=ES&limit=50',parametrosBusqueda)
       .then(response => response.json())
       .then(data => { 
@@ -58,7 +58,7 @@ function Home() {
       })
   }
   //console.log(albums)
-  
+
   return (
     <>
       <div className='Home mx-3 mt-5'>
@@ -80,7 +80,6 @@ function Home() {
        </Container>
        <Container>
        <h1>{artist.name}</h1>
-       //TODO: comprobar la persistencia de los datos para que no pete
        {/* <h4>{artist.genres.map((genre) => genre).join(', ')}</h4> */}
           <Row className="mx-2 mt-2 row row-cols-4">
           {albums.map((album, i) =>{

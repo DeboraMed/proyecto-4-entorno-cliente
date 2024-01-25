@@ -23,7 +23,7 @@ const Footer = () => {
             </Nav.Link>
             </Nav.Item>
         </Nav>
-        <p className="text-center text-light mt-4 mb-4">Debora Medina Rivero 2º DAW ©2024</p>
+      
         </div>
       </footer>
       </>
