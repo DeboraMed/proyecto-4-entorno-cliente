@@ -7,12 +7,12 @@ const Navbar = () => {
     const navigate = useNavigate()
 
     const loginUsuario = () => {
-        setUser(false)
+        //setUser(true)
         navigate("/login")
     }
 
     const cerrarSesion = () => {
-        setUser(true)
+        setUser(false)
         navigate("/")
     }
 

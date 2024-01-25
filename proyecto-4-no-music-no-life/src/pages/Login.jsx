@@ -20,6 +20,7 @@ const Login = () => {
         if (credencialesvalidas) {
             alert('Login correcto')
             setUser(credencialesvalidas)
+            navigate("/perfil")
         }
         else
             alert('Login incorrecto')

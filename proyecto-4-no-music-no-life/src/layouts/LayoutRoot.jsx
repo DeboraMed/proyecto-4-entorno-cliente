@@ -10,7 +10,6 @@ const LayoutRoot = () => {
     return ( 
         <>
             <Navbar />
-            
                 {
                     navigation.state === "loading" && (
                         <div>Loading</div>

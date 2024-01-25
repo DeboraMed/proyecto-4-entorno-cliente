@@ -1,4 +1,5 @@
 import Nav from 'react-bootstrap/Nav';
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -7,23 +8,26 @@ const Footer = () => {
         <div className="container">
         <Nav className="justify-content-center border-bottom pb-3 mb-3" activeKey="/">
             <Nav.Item>
-            <Nav.Link className="text-light" href="/">Home</Nav.Link>
+            <NavLink to="/" className="text-light text-decoration-none mx-3">
+                Home
+            </NavLink>
             </Nav.Item>
             <Nav.Item>
-            <Nav.Link className="text-light" href="/contacto">Contacto</Nav.Link>
+            <NavLink to="/contacto" className="text-light text-decoration-none mx-3">
+                Contacto
+            </NavLink>
             </Nav.Item>
             <Nav.Item>
-            <Nav.Link className="text-light" href="/login">
+            <NavLink to="/login" className="text-light text-decoration-none mx-3">
                 Login
-            </Nav.Link>
+            </NavLink>
             </Nav.Item>
             <Nav.Item>
-            <Nav.Link className="text-light" href="/registro">
+            <NavLink to="/registro" className="text-light text-decoration-none mx-3">
                 Registrate
-            </Nav.Link>
+            </NavLink>
             </Nav.Item>
         </Nav>
-      
         </div>
       </footer>
       </>

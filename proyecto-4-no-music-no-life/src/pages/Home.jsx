@@ -29,9 +29,7 @@ function Home() {
       .then(data => setTokenAcceso(data.access_token)) 
   }, [])
 
-  // busqueda
   async function busqueda() {
-    //console.log("Busqueda de " + inputBusqueda)
 
     let parametrosBusqueda = {
       method: 'GET',
@@ -53,11 +51,9 @@ function Home() {
     let obtenerAlbums = await fetch('https://api.spotify.com/v1/artists/'+ idArtista + '/albums'+ '?include_groups=album&market=ES&limit=50',parametrosBusqueda)
       .then(response => response.json())
       .then(data => { 
-        //console.log(data);
         setAlbums(data.items); 
       })
   }
-  //console.log(albums)
 
   return (
     <>
@@ -78,25 +74,28 @@ function Home() {
         <Button onClick={busqueda}>Buscar</Button>
         </InputGroup>
        </Container>
-       <Container>
+       <Container className='mb-5'>
        <h1>{artist.name}</h1>
        {/* <h4>{artist.genres.map((genre) => genre).join(', ')}</h4> */}
-          <Row className="mx-2 mt-2 row row-cols-4">
-          {albums.map((album, i) =>{
-            console.log(albumActual)
+          <Row className="row row-cols-4 mb-5">
+          {
+            albums.map((album, i) =>{
+            //console.log(albumActual)
             // mostrar los albunes
             return(
-              <Card className='mt-2 cursor-pointer'>
-            <Card.Img className='mt-3' src={album.images[0].url} onClick={() => setAlbumActual(album.id)}/>
-              <Card.Body>
-                <Card.Title>
-                <h5>{album.name}</h5>
-                <h6>{album.release_date}</h6>
-                </Card.Title>
-              </Card.Body>   
+              <Card key={i} className='mt-2'>
+                <Card.Img className='mt-3' src={album.images[0].url} onClick={() => setAlbumActual(album.id)}/>
+                <Card.Body>
+                  <Card.Title>
+                  <h5>{album.name}</h5>
+                  </Card.Title>
+                  <span className='align-bottom'><h6>{album.release_date}</h6></span>
+                </Card.Body>
+           
             </Card> 
             )
-          })}             
+          })
+          }             
           </Row>
        </Container>
       </div> 
