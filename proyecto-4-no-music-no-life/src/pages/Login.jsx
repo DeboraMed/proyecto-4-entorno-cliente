@@ -3,8 +3,8 @@ import { Container} from 'react-bootstrap';
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { validaUsuario } from '../database/DBusuarios';
-import { useContext } from 'react'
-import { UserContext } from '../context/UserContext'
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -13,7 +13,6 @@ const Login = () => {
     const {user,setUser} = useContext(UserContext)
 
     const mensajeError= validar(email,password);
-    console.log(email,password)
 
     const login = async (email, password) => {
         let credencialesvalidas = await validaUsuario(email, password)
@@ -34,9 +33,11 @@ const Login = () => {
                     e.preventDefault();
                     login(email,password);
                 }}>
+                <h1 className="h3 mb-4 font-weight-normal">Logueate</h1>
                 <Form.Group className="mb-3 w-25">
-                    <Form.Label>Email</Form.Label>
                     <Form.Control 
+                        size='lg'
+                        autoFocus={true}
                         type="email" 
                         name='email'
                         placeholder="email@example.com"
@@ -46,8 +47,8 @@ const Login = () => {
                          />
                 </Form.Group>
                 <Form.Group className="mb-3 w-25">
-                    <Form.Label>Contraseña</Form.Label>
                     <Form.Control 
+                        size='lg'
                         type="password"
                         name='password'
                         placeholder='Contraseña'
@@ -55,10 +56,10 @@ const Login = () => {
                         onChange = {e => setPassword(e.target.value)}
                          />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active mb-3' disabled={mensajeError}>Logueate</button>
+                <button type="submit" className='btn btn-outline-dark active mb-3 btn-lg' disabled={mensajeError}>Logueate</button>
                 <p>{mensajeError}</p>
             </Form>
-            <button className='btn btn-outline-primary active' onClick={() => navigate("/registro")}>Regístrate</button>
+            <button type="button" className='btn btn-outline-dark active btn-lg' onClick={() => navigate("/registro")}>Registrate</button>
             <p>Regístrate sino tienes una cuenta</p>
        </Container>
        </div>
@@ -67,11 +68,11 @@ const Login = () => {
 
 const validar = (email, password) => {
     if(!email.includes('@') && !email.includes('.')) 
-        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Email incorrecto.'</div>;
+        return <div className="alert alert-warning opacity-75 w-25" role="alert">Introduce un email.</div>;
     if(password.length === 0) 
-        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Introduce la contraseña.'</div>;
+        return <div className="alert alert-warning opacity-75 w-25" role="alert">Introduce la contraseña.</div>;
     else if (password.length <4) 
-        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Contraseña de mínimo 4 caracteres.'</div>;
+        return <div className="alert alert-warning opacity-75 w-25" role="alert">Contraseña de mínimo 4 caracteres.</div>;
 }
 
 export default Login

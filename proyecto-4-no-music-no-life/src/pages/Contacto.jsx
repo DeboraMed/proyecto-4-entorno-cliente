@@ -20,9 +20,12 @@ const Contacto = () => {
                     e.preventDefault();
                     confirmarValidacion(email,nombre,mensaje);
                 }}>
-                <Form.Group className="mb-3">
+                <h1 class="h3 mb-4 font-weight-normal">Formulario de contacto</h1>
+                <Form.Group className="mb-3 w-50">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control 
+                        size='lg'
+                        autoFocus={true}
                         type="text"
                         name='nombre'
                         placeholder='Nombre'
@@ -30,9 +33,10 @@ const Contacto = () => {
                         onChange = {e => setNombre(e.target.value)}
                          />
                 </Form.Group>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3 w-50">
                     <Form.Label>Email</Form.Label>
                     <Form.Control 
+                        size='lg'
                         type="email" 
                         name='email'
                         placeholder="email@example.com"
@@ -41,9 +45,10 @@ const Contacto = () => {
                         onChange = {e => setEmail(e.target.value)}
                          />
                 </Form.Group>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3 w-50">
                     <Form.Label>Mensaje</Form.Label>
                     <Form.Control 
+                        size='lg'
                         name = 'mensaje'
                         placeholder='Introduce aqui tu mensaje'
                         as="textarea" 
@@ -53,7 +58,7 @@ const Contacto = () => {
 
                         />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active mb-3' disabled={mensajeError}>Enviar</button>
+                <button type='submit' className='btn btn-outline-dark active mb-3 btn-lg' disabled={mensajeError}>Enviar</button>
                 <p>{mensajeError}</p>
             </Form>
        </Container>
@@ -70,13 +75,13 @@ const confirmarValidacion = () => {
 
 const validar = (email, nombre, mensaje) => {
     if(nombre.length === 0) 
-        return <div className="alert alert-warning opacity-75" role="alert">'Introduce un nombre válido'</div>;
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">Introduce un nombre válido</div>;
     if(!email.includes('@')) 
-        return <div className="alert alert-warning opacity-75" role="alert">'Introduce un email válido'</div>;
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">Introduce un email válido</div>;
     if(mensaje.length === 0) 
-        return <div className="alert alert-warning opacity-75" role="alert">'Introduce un mensaje'</div>;
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">Introduce un mensaje</div>;
     else if (mensaje.length <10) 
-        return <div className="alert alert-warning opacity-75" role="alert">'Mensaje de mínimo 10 caracteres'</div>;
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">Mensaje de mínimo 10 caracteres</div>;
 }
 
 export default Contacto

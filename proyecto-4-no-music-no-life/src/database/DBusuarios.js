@@ -53,7 +53,7 @@ function insertarUsuario(usuario, db) {
 // READ
 export const validaUsuario = (email, password) => {
     return new Promise((result) => {
-        let request = indexedDB.open("Users", 3)
+        let request = indexedDB.open("Users", 1)
 
         request.onerror = function () {
             console.error("Error", openRequest.error)

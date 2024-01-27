@@ -14,8 +14,8 @@ const LayoutRoot = () => {
                         <div>Loading</div>
                     )
                 }
-            <Footer/>
             <Outlet />
+            <Footer/>
         </>
     )
 }

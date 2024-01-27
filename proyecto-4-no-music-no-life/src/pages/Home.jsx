@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, InputGroup, FormControl, Button, Row, Card, ListGroup } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
@@ -12,6 +13,9 @@ function Home() {
   const [ artist, setArtist] = useState([])
   const [ albums, setAlbums] = useState([])
   const [ albumActual, setAlbumActual] = useState("")
+  const [ canciones, setCanciones] = useState([])
+
+  const navigate = useNavigate()
 
   // se ejecuta al comienzo 
   useEffect(() => {
@@ -47,12 +51,19 @@ function Home() {
         setArtist(data.artists.items[0])
         return data.artists.items[0].id})
 
-      // LLAMADA ANIDADA obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
+    // LLAMADA ANIDADA obtener los 50 albunes del artista en españa: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
     let obtenerAlbums = await fetch('https://api.spotify.com/v1/artists/'+ idArtista + '/albums'+ '?include_groups=album&market=ES&limit=50',parametrosBusqueda)
       .then(response => response.json())
       .then(data => { 
         setAlbums(data.items); 
-      })
+    })
+
+/*       // para las canciones: https://api.spotify.com/v1/albums/{album.id}/tracks
+    let obtenerCanciones = await fetch('https://api.spotify.com/v1/albums/' + albumActual + '/tracks',parametrosBusqueda)
+    .then(response => response.json())
+    .then(data => { 
+      setCanciones(data.items); 
+    })  */
   }
 
   return (
@@ -71,16 +82,16 @@ function Home() {
           }}
           onChange={e => setInputBusqueda(e.target.value)}
         />
-        <Button onClick={busqueda}>Buscar</Button>
+        <Button className='btn btn-outline-dark active btn-lg' onClick={busqueda}>Buscar</Button>
         </InputGroup>
-       </Container>
-       <Container className='mb-5'>
+      </Container>
+      <Container className='mb-5'>
        <h1>{artist.name}</h1>
        <h4>{(artist.genres) ? artist.genres.map((genre) => genre).join(', ') : ''}</h4>
           <Row className="row row-cols-4 mb-5">
           {
             albums.map((album, i) =>{
-            //console.log(albumActual)
+            //console.log(album.id)
             // mostrar los albunes
             return(
               <Card key={i} className='mt-2'>
@@ -91,7 +102,13 @@ function Home() {
                   </Card.Title>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                  <ListGroup.Item>Release:<h6>{album.release_date}</h6></ListGroup.Item>
+                  <ListGroup.Item>
+                    Release:<h6>{album.release_date}</h6>
+                    <a onClick={()=> navigate("/disco")} className="link-dark position-absolute bottom-0 end-0">
+                      <h1 className='position-absolute bottom-0 end-0 link-dark'>+
+                      </h1>
+                    </a>
+                  </ListGroup.Item>
                 </ListGroup>  
             </Card> 
             )

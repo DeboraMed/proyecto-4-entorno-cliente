@@ -31,9 +31,11 @@ const Registro = () => {
         <Container>
             <Form
                 onSubmit={handleSubmit}>
+                <h1 class="h3 mb-4 font-weight-normal">Registrate</h1>
                 <Form.Group className="mb-3 w-50">
-                    <Form.Label>Nombre</Form.Label>
                     <Form.Control 
+                        size='lg'
+                        autoFocus={true}
                         type="text" 
                         name='nombre'
                         placeholder="Nombre"
@@ -42,9 +44,9 @@ const Registro = () => {
                         onChange = {e => setNombre(e.target.value)}
                          />
                 </Form.Group>
-                <Form.Group className="mb-3 w-50">
-                    <Form.Label>Email</Form.Label>
+                <Form.Group className="mb-3 w-50">     
                     <Form.Control 
+                        size='lg'
                         type="email" 
                         name='email'
                         placeholder="email@example.com"
@@ -53,9 +55,9 @@ const Registro = () => {
                         onChange = {e => setEmail(e.target.value)}
                          />
                 </Form.Group>
-                <Form.Group className="mb-3 w-50">
-                    <Form.Label>Contraseña</Form.Label>
+                <Form.Group className="mb-3 w-50">      
                     <Form.Control 
+                        size='lg'
                         type="password"
                         name='password'
                         placeholder='Contraseña'
@@ -63,11 +65,11 @@ const Registro = () => {
                         onChange = {e => setPassword(e.target.value)}
                          />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active mb-3' disabled={mensajeError}>Registrate</button>
+                <button type='submit' className='btn btn-outline-dark active mb-3 btn-lg' disabled={mensajeError}>Registrate</button>
                 {mensajeError}
             </Form>
-            <button className='btn btn-outline-primary active' onClick={() => navigate("/login")}>Logueate</button>
-            <p>¿Ya tienes una cuenta? Logueate</p>
+            <button className='btn btn-outline-dark active btn-lg' onClick={() => navigate("/login")}>Logueate</button>
+            <p className='font-weight-bold'>¿Ya tienes una cuenta? Logueate.</p>
        </Container>
        </div>
     )
