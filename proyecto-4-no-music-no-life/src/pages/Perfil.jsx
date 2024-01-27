@@ -7,7 +7,6 @@ const Perfil = () => {
     const {user,setUser} = useContext(UserContext)
     let nombre = user.nombre
     let email = user.email
-    console.log(user)
 
     return (
         <Container>

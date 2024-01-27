@@ -53,7 +53,7 @@ const Contacto = () => {
 
                         />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active' disabled={mensajeError}>Enviar</button>
+                <button type='submit' className='btn btn-outline-primary active mb-3' disabled={mensajeError}>Enviar</button>
                 <p>{mensajeError}</p>
             </Form>
        </Container>
@@ -64,14 +64,19 @@ const Contacto = () => {
 const confirmarValidacion = () => {
     if (validar)
         alert('Mensaje enviado correctamente')
-    else alert('Datos incorrectos')
+    else 
+        alert('Ha ocurrido un error')
 }
 
 const validar = (email, nombre, mensaje) => {
-    if(nombre.length === 0) return 'Introduce un nombre.';
-    if(!email.includes('@')) return 'Email incorrecto.';
-    if(mensaje.length === 0) return 'Introduce un mensaje.';
-    else if (mensaje.length <10) return 'Mensaje de mínimo 10 caracteres.';
+    if(nombre.length === 0) 
+        return <div className="alert alert-warning opacity-75" role="alert">'Introduce un nombre válido'</div>;
+    if(!email.includes('@')) 
+        return <div className="alert alert-warning opacity-75" role="alert">'Introduce un email válido'</div>;
+    if(mensaje.length === 0) 
+        return <div className="alert alert-warning opacity-75" role="alert">'Introduce un mensaje'</div>;
+    else if (mensaje.length <10) 
+        return <div className="alert alert-warning opacity-75" role="alert">'Mensaje de mínimo 10 caracteres'</div>;
 }
 
 export default Contacto

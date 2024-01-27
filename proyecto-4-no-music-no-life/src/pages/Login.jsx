@@ -55,7 +55,7 @@ const Login = () => {
                         onChange = {e => setPassword(e.target.value)}
                          />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active' disabled={mensajeError}>Logueate</button>
+                <button type='submit' className='btn btn-outline-primary active mb-3' disabled={mensajeError}>Logueate</button>
                 <p>{mensajeError}</p>
             </Form>
             <button className='btn btn-outline-primary active' onClick={() => navigate("/registro")}>Regístrate</button>
@@ -66,9 +66,12 @@ const Login = () => {
 }
 
 const validar = (email, password) => {
-    if(!email.includes('@')) return 'Email incorrecto.';
-    if(password.length === 0) return 'Introduce la contraseña.';
-    else if (password.length <4) return 'Contraseña de mínimo 4 caracteres.';
+    if(!email.includes('@') && !email.includes('.')) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Email incorrecto.'</div>;
+    if(password.length === 0) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Introduce la contraseña.'</div>;
+    else if (password.length <4) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Contraseña de mínimo 4 caracteres.'</div>;
 }
 
 export default Login

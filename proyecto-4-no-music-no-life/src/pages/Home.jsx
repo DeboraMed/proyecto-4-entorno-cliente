@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap'
+import { Container, InputGroup, FormControl, Button, Row, Card, ListGroup } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 
 const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
@@ -76,7 +76,7 @@ function Home() {
        </Container>
        <Container className='mb-5'>
        <h1>{artist.name}</h1>
-       {/* <h4>{artist.genres.map((genre) => genre).join(', ')}</h4> */}
+       <h4>{(artist.genres) ? artist.genres.map((genre) => genre).join(', ') : ''}</h4>
           <Row className="row row-cols-4 mb-5">
           {
             albums.map((album, i) =>{
@@ -89,9 +89,10 @@ function Home() {
                   <Card.Title>
                   <h5>{album.name}</h5>
                   </Card.Title>
-                  <span className='align-bottom'><h6>{album.release_date}</h6></span>
                 </Card.Body>
-           
+                <ListGroup className="list-group-flush">
+                  <ListGroup.Item>Release:<h6>{album.release_date}</h6></ListGroup.Item>
+                </ListGroup>  
             </Card> 
             )
           })

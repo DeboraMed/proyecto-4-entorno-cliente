@@ -4,8 +4,8 @@ html {
     
   }
   body {
-    background-image: url(../assets/nino.jpg);
+    background:  left 5%  no-repeat url(../assets/nino.jpg);
     background-size: cover;
-    margin: 0;
+
   }
   

@@ -11,9 +11,7 @@ const Registro = () => {
     const navigate = useNavigate()
     const usuario = { nombre, email, password }
 
-    const mensajeError= validar(nombre,email,password);
-    console.log(nombre,email,password)
-    
+    const mensajeError= validar(nombre,email,password); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,8 +63,8 @@ const Registro = () => {
                         onChange = {e => setPassword(e.target.value)}
                          />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-primary active' disabled={mensajeError}>Registrate</button>
-                <p>{mensajeError}</p>
+                <button type='submit' className='btn btn-outline-primary active mb-3' disabled={mensajeError}>Registrate</button>
+                {mensajeError}
             </Form>
             <button className='btn btn-outline-primary active' onClick={() => navigate("/login")}>Logueate</button>
             <p>¿Ya tienes una cuenta? Logueate</p>
@@ -77,10 +75,14 @@ const Registro = () => {
 
 
 const validar = (nombre,email, password) => {
-    if(nombre.length <3) return 'Nombre de mínimo 3 caracteres.';
-    if(!email.includes('@')) return 'Email incorrecto.';
-    if(password.length === 0) return 'Introduce la contraseña.';
-    else if (password.length <4) return 'Contraseña de mínimo 4 caracteres.';
+    if(nombre.length <3) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Nombre de mínimo 3 caracteres.'</div>;
+    if(!email.includes('@')) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Email incorrecto.'</div>;
+    if(password.length === 0) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Introduce la contraseña.'</div>;
+    else if (password.length <4) 
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">'Contraseña de mínimo 4 caracteres'</div>;
 }
 
 export default Registro

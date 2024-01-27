@@ -6,7 +6,7 @@ const Footer = () => {
         <>
         <footer className='footer fixed-bottom mb-0 mt-auto py-1 bg-dark'>
         <div className="container">
-        <Nav className="justify-content-center border-bottom pb-3 mb-3" activeKey="/">
+        <Nav className="justify-content-center border-bottom pt-2 pb-3 mb-3" activeKey="/">
             <Nav.Item>
             <NavLink to="/" className="text-light text-decoration-none mx-3">
                 Home

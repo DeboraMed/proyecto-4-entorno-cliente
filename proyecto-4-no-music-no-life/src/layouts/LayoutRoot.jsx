@@ -5,7 +5,6 @@ import "./LayoutRoot.css"
 
 const LayoutRoot = () => {
     const navigation = useNavigation()
-    console.log(navigation)
 
     return ( 
         <>
