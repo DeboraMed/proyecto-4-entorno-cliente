@@ -17,7 +17,7 @@ const Login = () => {
     const login = async (email, password) => {
         let credencialesvalidas = await validaUsuario(email, password)
         if (credencialesvalidas) {
-            alert('Login correcto')
+            credencialesvalidas.mensaje = 'Usuario ha accedido correctamente'
             setUser(credencialesvalidas)
             navigate("/")
         }

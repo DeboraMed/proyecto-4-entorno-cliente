@@ -52,7 +52,6 @@ const Registro = () => {
 
         try {
             DBusuarios(usuario);
-            alert('Usuario registrado correctamente');
             login(usuario.email,usuario.password);
         } catch (error) {
             console.error('Error al guardar el usuario en la base de datos:', error);
@@ -63,7 +62,7 @@ const Registro = () => {
     const login = async (email, password) => {
         let credencialesvalidas = await validaUsuario(email, password)
         if (credencialesvalidas) {
-            alert('Login correcto')
+            credencialesvalidas.mensaje = 'Usuario se ha registrado correctamente'
             setUser(credencialesvalidas)
             navigate("/")
         }

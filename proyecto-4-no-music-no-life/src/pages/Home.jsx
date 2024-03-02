@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, InputGroup, FormControl, Button, Row, Card, ListGroup } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import {Container, InputGroup, FormControl, Button, Row, Card, ListGroup, Alert} from 'react-bootstrap'
+import {useState, useEffect, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+import {UserContext} from "../context/UserContext.jsx";
 
 const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
@@ -14,6 +15,8 @@ function Home() {
   const [ albums, setAlbums] = useState([])
   const [ albumActual, setAlbumActual] = useState("")
   const [ canciones, setCanciones] = useState([])
+
+  const {user,setUser} = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -70,6 +73,11 @@ function Home() {
     <>
       <div className='Home mx-3 mt-5'>
        <Container>
+           {user && user.mensaje && (
+               <Alert variant="success" onClose={() => user.mensaje = null} dismissible>
+                   {user.mensaje}
+               </Alert>
+           )}
         <InputGroup className='mb-3' size='lg'>
         <FormControl
           name = 'busqueda'
