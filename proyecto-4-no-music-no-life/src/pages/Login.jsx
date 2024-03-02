@@ -19,7 +19,7 @@ const Login = () => {
         if (credencialesvalidas) {
             alert('Login correcto')
             setUser(credencialesvalidas)
-            navigate("/perfil")
+            navigate("/")
         }
         else
             alert('Login incorrecto')
@@ -59,8 +59,6 @@ const Login = () => {
                 <button type="submit" className='btn btn-outline-dark active mb-3 btn-lg' disabled={mensajeError}>Logueate</button>
                 <p>{mensajeError}</p>
             </Form>
-            <button type="button" className='btn btn-outline-dark active btn-lg' onClick={() => navigate("/registro")}>Registrate</button>
-            <p>Regístrate sino tienes una cuenta</p>
        </Container>
        </div>
     )
