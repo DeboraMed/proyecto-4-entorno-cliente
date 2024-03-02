@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
                 element: <Perfil />,
             },
             {
-                path:"/disco",
+                path:"/disco/:albumActual",
                 element: <Disco />,
             },
             ]

@@ -112,7 +112,7 @@ function Home() {
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>
                     Release:<h6>{album.release_date}</h6>
-                    <a onClick={()=> navigate("/disco")} className="link-dark position-absolute bottom-0 end-0">
+                    <a onClick={()=> navigate(`/disco/${album.id}`)} className="link-dark position-absolute bottom-0 end-0">
                       <h1 className='position-absolute bottom-0 end-0 link-dark'>+
                       </h1>
                     </a>
