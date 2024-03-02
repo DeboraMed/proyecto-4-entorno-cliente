@@ -70,6 +70,8 @@ export const validaUsuario = (email, password) => {
                     if(password === event.target.result.password)
                         result({nombre: event.target.result.nombre,
                                 email: event.target.result.email})
+                    else
+                        result(false)
                 } catch {
                     result(false)
                 }
