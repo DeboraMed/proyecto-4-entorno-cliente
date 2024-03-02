@@ -27,10 +27,13 @@ const Navbar = () => {
                         <button onClick={() => cerrarSesion()} className="btn btn-link text-light text-decoration-none" >Log Out</button>
                     </>
                     ):(
-                        <button  onClick={() => loginUsuario()} className="btn btn-link text-light text-decoration-none">Login</button>)
+                    <>
+                        <button  onClick={() => loginUsuario()} className="btn btn-link text-light text-decoration-none">Login</button>
+                        <NavLink to="/registro" className="btn btn-link text-light text-decoration-none">Registrate</NavLink>
+                    </>
+                    )
                 };
-                <NavLink to="/registro" className="btn btn-link text-light text-decoration-none">Registrate</NavLink> 
-                <NavLink to="/contacto" className="btn btn-link text-light text-decoration-none">Contacto</NavLink> 
+                <NavLink to="/contacto" className="btn btn-link text-light text-decoration-none">Contacto</NavLink>
             </nav>
         </div>
     )
