@@ -42,13 +42,10 @@ function Busqueda() {
             input_genre: formData.get('input_genre'),
         };
 
-        console.log(datosBusqueda)
-
         busqueda(datosBusqueda)
     };
 
     async function busqueda(datosBusqueda) {
-
 
         await getToken()
 
@@ -65,7 +62,6 @@ function Busqueda() {
         if (datosBusqueda.input_year !== '' && datosBusqueda.input_year != null)
             consulta += ` year:${datosBusqueda.input_year}`
 
-        console.log(consulta)
 
         if (datosBusqueda.input_type === 'album')
             //request por Id de artista:
@@ -84,7 +80,6 @@ function Busqueda() {
                 })
         }
     }
-
 
     return (<>
             <div className='Home mx-3 mt-5'>
@@ -107,7 +102,7 @@ function Busqueda() {
                                     <option value="artist">Artista</option>
                                 </Form.Select>
                             </Form.Group>
-
+                            
                             {tipo === "album" &&
                                 <Form.Group className="mb-3 w-25">
                                     <Form.Label>Década</Form.Label>

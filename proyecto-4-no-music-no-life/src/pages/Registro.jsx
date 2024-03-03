@@ -21,7 +21,7 @@ const Registro = () => {
             event.preventDefault();
             event.stopPropagation();
             setValidated(true);
-            console.log("No validao")
+            console.log("No validado")
             return;
         }
 
