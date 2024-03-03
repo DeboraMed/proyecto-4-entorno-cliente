@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container, InputGroup, FormControl, Button, Row, Card, ListGroup} from 'react-bootstrap'
+import {Container, InputGroup, FormControl, Button, Row, Card, ListGroup, Col} from 'react-bootstrap'
 import {useState, useEffect} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import {UserContext} from '../context/UserContext';
@@ -11,8 +11,14 @@ const Disco = () => {
 
     const {albumActual} = useParams()
     let token = ""
-
     const [canciones, setCanciones] = useState([])
+    const [portada, setPortada] = useState([])
+    const [disco, setDisco] = useState([])
+    const [artista, setArtista] = useState([])
+
+    useEffect(() => {
+        busqueda();
+    }, []) // <-- empty dependency array
 
     function millisToMinutesAndSeconds(millis) {
         var minutes = Math.floor(millis / 60000);
@@ -45,37 +51,48 @@ const Disco = () => {
         }
 
         // para las canciones: https://api.spotify.com/v1/albums/{album.id}/tracks
-        await fetch('https://api.spotify.com/v1/albums/' + albumActual + '/tracks', parametrosBusqueda)
+        await fetch('https://api.spotify.com/v1/albums/' + albumActual, parametrosBusqueda)
             .then(response => response.json())
             .then(data => {
-                console.log(data.items)
-                setCanciones(data.items);
+                console.log(data)
+                setCanciones(data.tracks.items);
+                setPortada(data.images[0].url);
+                setArtista(data.artists[0].name);
+                setDisco(data);
             })
     }
 
-
     return (<div>
-
-        <Button className='btn btn-outline-dark active btn-lg' onClick={busqueda}>Buscar</Button>
-
-        <Row className="row row-cols-4 mb-5">
-            {canciones.map((cancion, i) => {
-                //console.log(album.id)
-                // mostrar los albunes
-                return (<Card key={i} className='mt-2'>
+        <Container className='mb-5'>
+            <Row>
+                <Col md={{span: 8, offset: 2}}>
+                    <h1>{artista}</h1>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{span: 3, offset: 2}}>
+                    <Card.Img variant="top" src={portada}/>
+                </Col>
+                <Col md={{span: 6, offset: 0}}>
+                    <Card>
                         <Card.Body>
                             <Card.Title>
-                                <h5>{cancion.name}</h5>
+                                <h5>{disco.name}</h5>
                             </Card.Title>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
-                            <ListGroup.Item>
-                                Duracion:<h6>{millisToMinutesAndSeconds(cancion.duration_ms)}</h6>
-                            </ListGroup.Item>
+                            {canciones.map((cancion, i) => {
+                                //console.log(album.id)
+                                // mostrar los albunes
+                                return (<ListGroup.Item key={i}>
+                                    <h6>&lt;&lt;{cancion.name}&gt;&gt; {millisToMinutesAndSeconds(cancion.duration_ms)}</h6>
+                                </ListGroup.Item>)
+                            })}
                         </ListGroup>
-                    </Card>)
-            })}
-        </Row>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     </div>)
 }
 
