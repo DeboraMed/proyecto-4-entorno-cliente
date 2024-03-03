@@ -1,8 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container, InputGroup, FormControl, Button, Row, Card, ListGroup, Col} from 'react-bootstrap'
+import {Container, Row, Card, ListGroup, Col} from 'react-bootstrap'
 import {useState, useEffect} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import {UserContext} from '../context/UserContext';
+import {useParams} from 'react-router-dom'
 
 const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
@@ -54,7 +53,6 @@ const Disco = () => {
         await fetch('https://api.spotify.com/v1/albums/' + albumActual, parametrosBusqueda)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setCanciones(data.tracks.items);
                 setPortada(data.images[0].url);
                 setArtista(data.artists[0].name);
@@ -82,7 +80,6 @@ const Disco = () => {
                         </Card.Body>
                         <ListGroup className="list-group-flush">
                             {canciones.map((cancion, i) => {
-                                //console.log(album.id)
                                 // mostrar los albunes
                                 return (<ListGroup.Item key={i}>
                                     <h6>&lt;&lt;{cancion.name}&gt;&gt; {millisToMinutesAndSeconds(cancion.duration_ms)}</h6>
