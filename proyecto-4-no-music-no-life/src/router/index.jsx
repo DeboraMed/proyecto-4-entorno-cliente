@@ -6,6 +6,7 @@ import Contacto from "../pages/Contacto.jsx"
 import Registro from "../pages/Registro.jsx"
 import Login from "../pages/Login.jsx"
 import LayoutRoot from "../layouts/LayoutRoot.jsx"
+import Suscripcion from "../pages/Suscripcion.jsx"
 import NotFound from "../pages/NotFound.jsx"
 
 export const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path:"/perfil",
                 element: <Perfil />,
+            },
+            {
+                path:"/suscripcion",
+                element: <Suscripcion />,
             },
             {
                 path:"/disco/:albumActual",

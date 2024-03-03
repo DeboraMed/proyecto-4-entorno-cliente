@@ -3,14 +3,32 @@ import { Container } from 'react-bootstrap';
 import { useState } from 'react';
 
 
-const Contacto = () => {
+const Suscripcion = () => {
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
-    const [mensaje, setMensaje] = useState("");
-    const [condiciones, setCondiciones] = useState("");
+    const [mayorEdad, setMayorEdad] = useState("");
+    const [edad, setEdad] = useState("");
     
-    const mensajeError= validar(email,nombre,mensaje,condiciones);
+    const mensajeError= validar(email,nombre,edad);
     const mensajeEnviado= confirmarValidacion();
+
+    const seleccionNacimiento = (e) => {
+        const fechaSeleccionada = new Date(e.target.value);
+        const fechaActual = new Date();
+        const dieciochoAnios = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
+        setEdad(parseInt(e.target.value));
+
+        if (mayorEdad === 'Si' && fechaSeleccionada >= dieciochoAnios) {
+            alert('Debes ser mayor de edad para enviar el formulario.');
+            setEdad(''); // limpia el input
+        } else if (mayorEdad === 'No' && fechaSeleccionada < dieciochoAnios) {
+            alert('No puedes ser menor de edad para enviar el formulario.');
+            setEdad(''); 
+        } else {
+            setEdad(e.target.value);
+        }
+    };
+
 
     return (
         <div className='Home mx-3 mt-5'>
@@ -18,9 +36,9 @@ const Contacto = () => {
             <Form
                 onSubmit={e=> {
                     e.preventDefault();
-                    validar(email,nombre,mensaje,condiciones);
+                    confirmarValidacion(email,nombre);
                 }}>
-                <h1 className="h3 mb-4 font-weight-normal">Formulario de contacto</h1>
+                <h1 className="h3 mb-4 font-weight-normal">Suscribete a nuestra Newsletter</h1>
                 <Form.Group className="mb-3 w-50">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control 
@@ -46,29 +64,37 @@ const Contacto = () => {
                          />
                 </Form.Group>
                 <Form.Group className="mb-3 w-50">
-                    <Form.Label>Mensaje</Form.Label>
-                    <Form.Control 
+                    <Form.Label>¿Eres mayor de edad?</Form.Label>
+                    <Form.Check
                         size='lg'
-                        name = 'mensaje'
-                        placeholder='Introduce aqui tu mensaje'
-                        as="textarea" 
-                        rows={4}
-                        value = {mensaje} 
-                        onChange = {e => setMensaje(e.target.value)}
-
-                        />
+                        name='mayorEdad'
+                        type='radio'
+                        label='Si'
+                        value='Si'
+                        checked={mayorEdad === 'Si'}
+                        onChange={e => setMayorEdad(e.target.value)}
+                    />
+                    <Form.Check
+                        size='lg'
+                        name='mayorEdad'
+                        type='radio'
+                        label='No'
+                        value='No'
+                        checked={mayorEdad === 'No'}
+                        onChange={e => setMayorEdad(e.target.value)}
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3 w-50">
-                    <Form.Check 
+                    <Form.Label>Selecciona tu fecha de nacimiento</Form.Label>
+                    <Form.Control 
                         size='lg'
-                        name = 'condiciones'
-                        type = 'checkbox'
-                        label = 'Aceptar condiciones'
-                        value = {condiciones} 
-                        onChange = {e => setCondiciones(e.target.value)}
+                        name='edad'
+                        type='date'
+                        value={edad}
+                        onChange={seleccionNacimiento}
                         />
                 </Form.Group>
-                <button type='submit' className='btn btn-outline-dark active mb-3 btn-lg' disabled={mensajeError + mensajeEnviado}>Enviar</button>
+                <button type='submit' className='btn btn-outline-dark active mb-3 btn-lg' disabled={mensajeError}>Enviar</button>
                 <p>{mensajeError}</p>
                 <p>{mensajeEnviado}</p>
             </Form>
@@ -91,19 +117,14 @@ const validateEmail= (email)  => {
     return re.test(email);
 }
 
-const validar = (email, nombre, mensaje,condiciones) => {
+const validar = (email, nombre,edad) => {
     if(nombre.length === 0) 
         return <div className="alert alert-warning opacity-75 w-50" role="alert">Introduce un nombre válido</div>;
     if(!validateEmail(email)) 
         return <div className="alert alert-warning opacity-75 w-50" role="alert">Introduce un email válido</div>;
-    if(mensaje.length === 0) 
-        return <div className="alert alert-warning opacity-75 w-50" role="alert">Introduce un mensaje</div>;
-    if(condiciones !== true)
-        return <div className="alert alert-warning opacity-75 w-50" role="alert">Tienes que aceptar las condiciones</div>;
-    else if (mensaje.length <10) 
-        return <div className="alert alert-warning opacity-75 w-50" role="alert">Mensaje de mínimo 10 caracteres</div>;
-    if(mensajeError === '')
-        confirmarValidacion()
+    if(edad === '')
+        return <div className="alert alert-warning opacity-75 w-50" role="alert">Campo edad requerido</div>;
+
 }
 
-export default Contacto
+export default Suscripcion

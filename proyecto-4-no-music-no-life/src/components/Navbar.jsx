@@ -34,6 +34,7 @@ const Navbar = () => {
                     )
                 };
                 <NavLink to="/contacto" className="btn btn-link text-light text-decoration-none">Contacto</NavLink>
+                <NavLink to="/suscripcion" className="btn btn-link text-light text-decoration-none">Suscríbete</NavLink>
             </nav>
         </div>
     )

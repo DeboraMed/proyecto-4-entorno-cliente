@@ -13,22 +13,6 @@ const Registro = () => {
     const usuario = { nombre, email, password }
     const {user,setUser} = useContext(UserContext)
 
-    //const mensajeError= validar(nombre,email,password);
-
-    /*
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!mensajeError) {
-            try {
-                DBusuarios(usuario);
-                alert('Usuario registrado correctamente');
-            } catch (error) {
-                console.error('Error al guardar el usuario en la base de datos:', error);
-                alert('Error al registrar el usuario');
-            }
-        }
-    };*/
-
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
@@ -69,16 +53,6 @@ const Registro = () => {
         else
             alert('Login incorrecto')
     }
-
-
-
-
-
-
-
-
-
-
 
     return (
         <div className='Home mx-3 mt-5'>
