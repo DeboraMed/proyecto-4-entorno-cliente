@@ -8,6 +8,7 @@ import Login from "../pages/Login.jsx"
 import LayoutRoot from "../layouts/LayoutRoot.jsx"
 import Suscripcion from "../pages/Suscripcion.jsx"
 import NotFound from "../pages/NotFound.jsx"
+import Busqueda from "../pages/Busqueda.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,9 @@ export const router = createBrowserRouter([
             {
                 path:"/perfil",
                 element: <Perfil />,
+            },            {
+                path:"/busqueda",
+                element: <Busqueda />,
             },
             {
                 path:"/suscripcion",
