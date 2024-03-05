@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Button, Row, Card, Alert, Col} from 'react-bootstrap'
-import {useState, useContext} from 'react'
-import {useNavigate} from 'react-router-dom'
-import {UserContext} from "../context/UserContext.jsx";
+import {useState} from 'react'
 import Form from "react-bootstrap/Form";
+import Pagination from "react-bootstrap/Pagination";
 
 const CLIENT_ID = "b3c7011458054337b04a46502fedb7ac"
 const CLIENT_SECRET = "3f52a0360e524b1fab33d250428464bd"
@@ -13,6 +12,10 @@ function Busqueda() {
     const [resultados, setResultados] = useState(null)
     const [tipo, setTipo] = useState("album")
     let token = ""
+    let pagina = 1
+    let datosBusqueda = {}
+    const limitePagina = 8
+    const [paginacion, setPaginacion] = useState([])
 
     async function getToken() {
         // API token acceso Spotify
@@ -35,7 +38,7 @@ function Busqueda() {
 
         const formData = new FormData(form);
 
-        const datosBusqueda = {
+        datosBusqueda = {
             input_search: formData.get('input_search'),
             input_type: formData.get('input_type'),
             input_year: formData.get('input_year'),
@@ -65,18 +68,37 @@ function Busqueda() {
 
         if (datosBusqueda.input_type === 'album')
             //request por Id de artista:
-            await fetch(`https://api.spotify.com/v1/${consulta}`, parametrosBusqueda)
+            await fetch(`https://api.spotify.com/v1/${consulta}&limit=${limitePagina}&offset=${(pagina * limitePagina)}`, parametrosBusqueda)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     setResultados(data.albums.items);
+                    let items = [];
+                    for (let number = 1; number <= data.albums.total / limitePagina && number<=10; number++) {
+                        items.push(<Pagination.Item key={number} active={number === pagina} onClick={() => {
+                            pagina = (number);
+                            busqueda(datosBusqueda);
+                        }}>
+                            {number}
+                        </Pagination.Item>,);
+                        setPaginacion(items)
+                    }
+
                 })
         else if (datosBusqueda.input_type === 'artist') {
-            await fetch(`https://api.spotify.com/v1/${consulta}`, parametrosBusqueda)
+            await fetch(`https://api.spotify.com/v1/${consulta}&limit=${limitePagina}&offset=${(pagina * limitePagina)}`, parametrosBusqueda)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     setResultados(data.artists.items);
+                    let items = [];
+                    for (let number = 1; number <= data.artists.total / limitePagina && number<=10; number++) {
+                        items.push(<Pagination.Item key={number} active={number === pagina} onClick={() => {
+                            pagina = (number);
+                            busqueda(datosBusqueda);
+                        }}>
+                            {number}
+                        </Pagination.Item>,);
+                        setPaginacion(items)
+                    }
                 })
         }
     }
@@ -183,6 +205,13 @@ function Busqueda() {
                         </Row>
                     </Container>
                 )}
+                <Container>
+                    <Row className="justify-content-md-center">
+                        <Col lg="auto">
+                            {resultados != null && resultados.length >= 1 && paginacion.length >= 2 && (<Pagination>{paginacion}</Pagination>)}
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         </>
     )
